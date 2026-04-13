@@ -1,5 +1,43 @@
 ---
-title: "collaborator-analysis"
-format: html
+Title: "collaborator-analysis a07"
+Author: Leticia Pereira
+Repo: tokay-leticia
+Format: html
 ---
+## Exercise: Explore, Clean, and Wrangle Data
+#importaing packages
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(here)
+```
+# reading in the data
+```{r}
+lobster_traps = read_csv(here::here("data/Lobster_Trap_Counts_All_Years_20210519.csv"))
+head(lobster_traps)
+
+```
+#Convert missing values using mutate() and na_if()
+```{r}
+lobster_traps = lobster_traps %>% 
+    mutate(TRAPS = na_if(TRAPS, -99999))
+
+unique(lobster_traps)
+
+```
+#filter
+```{r}
+not_napl = lobster_traps %>% 
+    filter(SITE != "NAPL")
+
+carp_20_traps = lobster_traps %>% 
+    filter(SITE == "CARP" & TRAPS > 20)
+
+# `group_by() %>% summarize()` practice
+max_lobster_traps = lobster_traps %>% 
+    group_by(SITE, MONTH) %>%
+    summarize(MAX_TRAPS = max(TRAPS, na.rm = TRUE))
+```
 
