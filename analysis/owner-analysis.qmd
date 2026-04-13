@@ -40,13 +40,6 @@ max_lobster <- lobster_abundance %>%
 ## Exercise: Data Visualization
 
 ```{r}
-ggplot(data = lobster_abundance, 
-       aes(x = SIZE_MM)) +
-    geom_histogram() +
-    facet_wrap(~SITE)
-```
-
-```{r}
 lobsters_summarize <- lobster_abundance %>% 
   group_by(SITE, YEAR) %>% 
   summarize(COUNT = n())
@@ -54,9 +47,12 @@ lobsters_summarize <- lobster_abundance %>%
 # line and point plot
 fig1<- ggplot(data = lobsters_summarize, aes(x = YEAR, y = COUNT)) +
   geom_point(aes(color = SITE)) +
-  geom_line(aes(color = SITE)) +
-  labs(aes(title = "Count of CA spiny lobster by year"))
+  geom_line(aes(color = SITE))
+fig1 <- fig1 + labs(title = "Count of CA spiny lobster by year", caption = "Figure 1: Count of CA spiny lobsters by year, tracked by site. The site with the highest peak count, IVEE, is a MPA.", Position = "left") + theme_minimal()
+
 fig1
+
+ggsave("fig1.png", plot = fig1, path = "../figs/")
 ```
 
 ```{r}
@@ -68,9 +64,14 @@ lobster_size_lrg <- lobster_abundance %>%
     drop_na()
 
 # bar plot
-ggplot(data = lobster_size_lrg, aes(x = SITE, y = COUNT, fill = SIZE_BIN)) +
+fig2 <- ggplot(data = lobster_size_lrg, aes(x = SITE, y = COUNT, fill = SIZE_BIN)) +
     geom_col()
 
+fig2 <- fig2 + labs(title = "Distribution of CA spiny lobster size by site", caption = "Figure 2: Count of CA spiny lobsters by site, split by size. The site with the most large lobsters, IVEE, is a MPA.") + theme_minimal()
+
+fig2
+
+ggsave("fig2.png", plot = fig2, path = "../figs/")
 ```
 
 ## 
