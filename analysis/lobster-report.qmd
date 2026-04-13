@@ -1,4 +1,17 @@
 ---
 title: "lobster-report"
 format: html
+author: "Tokay and Leticia"
 ---
+
+## Introduction
+
+The dataset used in this assignment was sourced from the EDI Data Portal and concerns the size and abundance of California spiny lobsters in Santa Barbara. Spiny lobsters are an
+
+Santa Barbara Coastal LTER, D. Reed, and R. Miller. 2022. SBC LTER: Reef: Abundance, size and fishing effort for California Spiny Lobster (Panulirus interruptus), ongoing since 2012 ver 8. Environmental Data Initiative. https://doi.org/10.6073/pasta/25aa371650a671bafad64dd25a39ee18 (Accessed 2026-04-13).
+
+The data was downloaded here: <https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-sbc.77.8> on April 13, 2026
+
+## Data
+
+## Analysis
