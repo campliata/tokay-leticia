@@ -40,4 +40,6 @@ max_lobster_traps = lobster_traps %>%
     group_by(SITE, MONTH) %>%
     summarize(MAX_TRAPS = max(TRAPS, na.rm = TRUE))
 ```
+## Exercise: Data Visualization
+
 
