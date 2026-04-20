@@ -14,11 +14,29 @@ The data was downloaded here: <https://portal.edirepository.org/nis/mapbrowse?pa
 
 ## Owner Analysis
 
+
 fig.1
 
 fig.2
 
 ## Collaborator Analysis
+
+# Here I plotted the total amount of lobster traps across the while site from 2012 - 2021. 
+
+```{r}
+ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
+    geom_point(aes(color = SITE)) 
+```
+fig 3. Total lobster traps at varying locations per year (2012 - 2021). 
+
+# next we looked at relative fshing pressure at each site.Fishing pressure has exactly or more than 8 traps, and a “low” fishing pressure has less than 8 traps (2019 - 2020). 
+```{r}
+ggplot(data = lobster_traps_fishing_pressure, aes(x = SITE, y = COUNT, fill = FISHING_PRESSURE)) +
+    geom_col() +
+    labs(y = "Number of Segments per Site") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+fig 4. Relative fishing pressure across each site. High = 8 or more traps; Low = fewer than 8 traps.
 
 ## Summary
 
