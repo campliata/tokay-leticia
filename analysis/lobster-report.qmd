@@ -4,6 +4,14 @@ format: html
 author: "Tokay and Leticia"
 ---
 
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(here)
+```
+
 ## Introduction
 
 The dataset used in this assignment was sourced from the EDI Data Portal and concerns the size and abundance of California spiny lobsters in Santa Barbara. Spiny lobsters are predators that serve as an essential predator species in kelp forests, and are a species that are harvested by humans for food. They are managed both as an indicator of kelp forest health and as a food source that can be overfished if too many adults of highly reproductive size are removed from the environment. This dataset contains size and abundance counts of spiny lobsters across sites and years, as well as trap counts by year and site.
@@ -12,30 +20,36 @@ Santa Barbara Coastal LTER, D. Reed, and R. Miller. 2022. SBC LTER: Reef: Abunda
 
 The data was downloaded here: <https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-sbc.77.8> on April 13, 2026
 
-## Owner Analysis
+# Owner Analysis
 
+## Figure 1
 
-fig.1
+![](images/fig1.png){fig-alt="A line graph showing the count of spiny lobsters per site across years."}
 
-fig.2
+## Figure 2
 
-## Collaborator Analysis
+![](images/fig2.png){fig-alt="A bar chart where the x axis is site and y axis is total count of lobsters. Each bar is divided by the number of small vs large lobsters."}
 
-# Here I plotted the total amount of lobster traps across the while site from 2012 - 2021. 
+# Collaborator Analysis
+
+## Here I plotted the total amount of lobster traps across the whole site from 2012 - 2021.
 
 ```{r}
 ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
     geom_point(aes(color = SITE)) 
 ```
-fig 3. Total lobster traps at varying locations per year (2012 - 2021). 
 
-# next we looked at relative fshing pressure at each site.Fishing pressure has exactly or more than 8 traps, and a “low” fishing pressure has less than 8 traps (2019 - 2020). 
+fig 3. Total lobster traps at varying locations per year (2012 - 2021).
+
+# next we looked at relative fshing pressure at each site.Fishing pressure has exactly or more than 8 traps, and a “low” fishing pressure has less than 8 traps (2019 - 2020).
+
 ```{r}
 ggplot(data = lobster_traps_fishing_pressure, aes(x = SITE, y = COUNT, fill = FISHING_PRESSURE)) +
     geom_col() +
     labs(y = "Number of Segments per Site") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
+
 fig 4. Relative fishing pressure across each site. High = 8 or more traps; Low = fewer than 8 traps.
 
 ## Summary
