@@ -27,9 +27,11 @@ The data was downloaded here: <https://portal.edirepository.org/nis/mapbrowse?pa
 ![](images/fig1.png){fig-alt="A line graph showing the count of spiny lobsters per site across years."}
 
 ## Figure 2
+
 ![](images/fig2.png){fig-alt="A bar chart where the x axis is site and y axis is total count of lobsters. Each bar is divided by the number of small vs large lobsters."}
 
 ## Collaborator Analysis
+
 ```{r}
 
 lobster_traps = read_csv(here::here("data/Lobster_Trap_Counts_All_Years_20210519.csv"))
