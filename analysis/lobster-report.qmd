@@ -41,9 +41,15 @@ lobster_traps = read_csv(here::here("data/Lobster_Trap_Counts_All_Years_20210519
 ## Here I plotted the total amount of lobster traps across the whole site from 2012 - 2021.
 
 ```{r}
+lobster_traps = lobster_traps %>% 
+    mutate(TRAPS = na_if(TRAPS, -99999))
+
+unique(lobster_traps)
 lobsters_traps_summarize = lobster_traps %>% 
   group_by(SITE, YEAR) %>% 
   summarize(TOTAL_TRAPS = sum(TRAPS, na.rm = TRUE))
+#ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
+    #geom_point(aes(color = SITE)) 
 ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
     geom_point(aes(color = SITE)) 
 

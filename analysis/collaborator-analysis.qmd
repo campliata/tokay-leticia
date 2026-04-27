@@ -41,5 +41,55 @@ max_lobster_traps = lobster_traps %>%
     summarize(MAX_TRAPS = max(TRAPS, na.rm = TRUE))
 ```
 ## Exercise: Data Visualization
+```{r}
+ggplot(data = lobster_traps, aes(x = TRAPS)) +
+    geom_histogram() +
+    facet_wrap( ~ YEAR)
+```
+```{r}
+lobsters_traps_summarize = lobster_traps %>% 
+  group_by(SITE, YEAR) %>% 
+  summarize(TOTAL_TRAPS = sum(TRAPS, na.rm = TRUE))
+```
+```{r}
+# line plot
+ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
+    geom_line(aes(color = SITE))
+
+```
+```{r}
+# line and point plot
+ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
+    geom_point(aes(color = SITE)) 
+    geom_line(aes(color = SITE))
+
+
+# I think this looks better?
+```
+```{r}
+lobster_traps_fishing_pressure = lobster_traps %>% 
+    filter(YEAR %in% c(2019, 2020, 2021)) %>%
+    mutate(FISHING_PRESSURE = if_else(TRAPS >= 8, true = "high", false = "low")) %>%
+    group_by(SITE, FISHING_PRESSURE) %>%
+    summarize(COUNT = n()) %>%
+    drop_na()
+```
+```{r}
+# bar plot
+ggplot(data = lobster_traps_fishing_pressure, aes(x = SITE, y = COUNT, fill = FISHING_PRESSURE)) +
+    geom_col() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+# I prefer the stacked figure
+```
+
+```{r}
+# dodged bar plot
+ggplot(data = lobster_traps_fishing_pressure, aes(x = SITE, y = COUNT, fill = FISHING_PRESSURE)) +
+    geom_col(position = "dodge") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# I dont like this one 
+```
+```
 
 
