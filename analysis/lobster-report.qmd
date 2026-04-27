@@ -41,13 +41,15 @@ lobster_traps = read_csv(here::here("data/Lobster_Trap_Counts_All_Years_20210519
 ## Here I plotted the total amount of lobster traps across the whole site from 2012 - 2021.
 
 ```{r}
-lobster_traps = lobster_traps %>% 
-    mutate(TRAPS = na_if(TRAPS, -99999))
+
 
 unique(lobster_traps)
 lobsters_traps_summarize = lobster_traps %>% 
   group_by(SITE, YEAR) %>% 
   summarize(TOTAL_TRAPS = sum(TRAPS, na.rm = TRUE))
+
+lobster_traps = lobster_traps %>% 
+    mutate(TRAPS = na_if(TRAPS, -99999))
 #ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
     #geom_point(aes(color = SITE)) 
 ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
@@ -76,4 +78,4 @@ fig 4. Relative fishing pressure across each site. High = 8 or more traps; Low =
 
 ## Summary
 
-Our analysis shows that particular sites contain very different sizes and numbers of lobsters in their surveyed populations. Across all sites, IVEE had the lowest fishing pressure, highest abundance of lobsters, and the largest lobsters. Even though they had the highest number of traps, IVEE had low fishing pressure because the number of segments for the total site was distributed in a way that led to lobsters being able to reach larger sizes.
+Our analysis shows that particular sites contain very different sizes and numbers of lobsters in their surveyed populations. Across all sites, IVEE had the lowest fishing pressure, highest abundance of lobsters, and the largest lobsters. IVEE had low fishing pressure because it had no traps, which led to lobsters being able to reach larger sizes. CARP had the second highest number of large lobsters, and second highest abundance, and the highest number of traps from 2012-2020.
