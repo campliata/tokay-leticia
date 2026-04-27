@@ -47,14 +47,12 @@ unique(lobster_traps)
 lobsters_traps_summarize = lobster_traps %>% 
   group_by(SITE, YEAR) %>% 
   summarize(TOTAL_TRAPS = sum(TRAPS, na.rm = TRUE))
-<<<<<<< HEAD
-=======
+
 
 lobster_traps = lobster_traps %>% 
     mutate(TRAPS = na_if(TRAPS, -99999))
 #ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
     #geom_point(aes(color = SITE)) 
->>>>>>> 60e8d4769e69b900deb8c575b87e1f2cc1e274aa
 ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
     geom_point(aes(color = SITE)) 
 
