@@ -20,17 +20,38 @@ fig.1
 fig.2
 
 ## Collaborator Analysis
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(here)
+
+lobster_traps = read_csv(here::here("data/Lobster_Trap_Counts_All_Years_20210519.csv"))
+
+```
+
 
 # Here I plotted the total amount of lobster traps across the while site from 2012 - 2021. 
 
 ```{r}
+lobsters_traps_summarize = lobster_traps %>% 
+  group_by(SITE, YEAR) %>% 
+  summarize(TOTAL_TRAPS = sum(TRAPS, na.rm = TRUE))
 ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
     geom_point(aes(color = SITE)) 
+
 ```
 fig 3. Total lobster traps at varying locations per year (2012 - 2021). 
 
 # next we looked at relative fshing pressure at each site.Fishing pressure has exactly or more than 8 traps, and a “low” fishing pressure has less than 8 traps (2019 - 2020). 
 ```{r}
+lobster_traps_fishing_pressure = lobster_traps %>% 
+    filter(YEAR %in% c(2019, 2020, 2021)) %>%
+    mutate(FISHING_PRESSURE = if_else(TRAPS >= 8, true = "high", false = "low")) %>%
+    group_by(SITE, FISHING_PRESSURE) %>%
+    summarize(COUNT = n()) %>%
+    drop_na()
 ggplot(data = lobster_traps_fishing_pressure, aes(x = SITE, y = COUNT, fill = FISHING_PRESSURE)) +
     geom_col() +
     labs(y = "Number of Segments per Site") +
