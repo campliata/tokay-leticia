@@ -41,7 +41,7 @@ ggplot(data = lobsters_traps_summarize, aes(x = YEAR, y = TOTAL_TRAPS)) +
 
 fig 3. Total lobster traps at varying locations per year (2012 - 2021).
 
-# next we looked at relative fshing pressure at each site.Fishing pressure has exactly or more than 8 traps, and a “low” fishing pressure has less than 8 traps (2019 - 2020).
+Next we looked at relative fishing pressure at each site.Fishing pressure has exactly or more than 8 traps, and a “low” fishing pressure has less than 8 traps (2019 - 2020).
 
 ```{r}
 ggplot(data = lobster_traps_fishing_pressure, aes(x = SITE, y = COUNT, fill = FISHING_PRESSURE)) +
